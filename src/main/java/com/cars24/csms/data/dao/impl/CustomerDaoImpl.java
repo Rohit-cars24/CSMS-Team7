@@ -27,11 +27,13 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public int createCustomer(CreateCustomerRequest createCustomerRequest) {
+
         CustomerEntity customerEntity=new CustomerEntity();
         customerEntity.setName(createCustomerRequest.getName());
         customerEntity.setPhone(createCustomerRequest.getPhone());
         customerEntity.setEmail(createCustomerRequest.getEmail());
         customerEntity.setAddress(createCustomerRequest.getAddress());
+
         customerEntity.setUserId(appUserRepository.findByUsername(createCustomerRequest.getEmail()).getId());
         customerEntity.setActive(true);
         customerRepository.save(customerEntity);
