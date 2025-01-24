@@ -69,7 +69,7 @@ class GlobalExceptionHandler {
     public  ResponseEntity<ApiResponse> handleEmployeeServiceExceptions(EmployeeServiceException employeeServiceException)
     {
         ApiResponse apiResponse=new ApiResponse();
-        apiResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        apiResponse.setStatuscode(HttpStatus.BAD_REQUEST.value());
         apiResponse.setSuccess(false);
         apiResponse.setMessage(employeeServiceException.getMessage());
         apiResponse.setService("EMPSRVC-" + HttpStatus.BAD_REQUEST.value());
@@ -83,7 +83,7 @@ class GlobalExceptionHandler {
 
         log.info("[GlobalExceptionHandler] handleInvoiceServiceExceptions {}", exception);
         ApiResponse apiResponse = new ApiResponse();
-        apiResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        apiResponse.setStatuscode(HttpStatus.BAD_REQUEST.value());
         apiResponse.setSuccess(false);
         apiResponse.setMessage(exception.getMessage());
         apiResponse.setService("INVSVC" + HttpStatus.BAD_REQUEST.value());
