@@ -1,3 +1,4 @@
+
 package com.cars24.csms.data.entities;
 
 import jakarta.persistence.Entity;
