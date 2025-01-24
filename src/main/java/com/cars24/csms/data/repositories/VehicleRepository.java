@@ -17,6 +17,23 @@ public interface VehicleRepository extends JpaRepository<VehicleEntity, Integer>
     List<VehicleEntity> findByColor(String color);
     List<VehicleEntity> findByModelAndColor(String model, String color);
 
-    //Optional<VehicleEntity> findByLicensePlate(String licensePlate);
+   //Optional<VehicleEntity> findByLicensePlate(String licensePlate);//
     VehicleEntity findByLicensePlate(String licensePlate);
+
+    // Fetch active vehicles by model and color
+    List<VehicleEntity> findByModelAndColorAndIsActiveTrue(String model, String color);
+
+    // Fetch active vehicles by model
+    List<VehicleEntity> findByModelAndIsActiveTrue(String model);
+
+    // Fetch active vehicles by color
+    List<VehicleEntity> findByColorAndIsActiveTrue(String color);
+
+    // Fetch active vehicles
+    List<VehicleEntity> findByIsActiveTrue();
+
+    // Find a vehicle by license plate if it's active
+    Optional<VehicleEntity> findByLicensePlateAndIsActiveTrue(String licensePlate);
+
+
 }

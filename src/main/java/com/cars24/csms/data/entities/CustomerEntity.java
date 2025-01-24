@@ -1,4 +1,3 @@
-
 package com.cars24.csms.data.entities;
 
 import jakarta.persistence.Entity;
@@ -14,9 +13,9 @@ import jakarta.persistence.Table;
 public class CustomerEntity {
     @Id
     private int customer_id;
-//    @NonNull
+    //    @NonNull
     private String name;
-//    @NonNull
+    //    @NonNull
     private String phone;
     private String email;
     private String address;
