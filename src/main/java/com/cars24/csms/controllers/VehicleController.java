@@ -48,10 +48,12 @@ public class VehicleController {
     @GetMapping
     public ResponseEntity<List<GetVehicleRes>> getVehicle(@RequestParam(required = false) String model,
                                                            @RequestParam(required = false) String color) {
+
         GetVehicleReq getVehicleReq = new GetVehicleReq();
         getVehicleReq.setModel(model);
         getVehicleReq.setColor(color);
 
+        log.info("[getVehicle] getVehicleReq {}",getVehicleReq);
         List<GetVehicleRes> vehicles = vehicleServiceImpl.getVehicle(getVehicleReq); // Call the service layer
         return ResponseEntity.ok(vehicles);
     }
@@ -62,6 +64,7 @@ public class VehicleController {
         try {
             // Pass the license plate and update request to the service
             UpdateVehicleRes updatedVehicle = vehicleServiceImpl.updateVehicle(licensePlate, updateVehicleReq);
+            log.info("Successfully updated vehicle with license plate: {}", licensePlate);
             return new ResponseEntity<>(updatedVehicle, HttpStatus.OK);
         } catch (RuntimeException e) {
             // If the vehicle is not found or other issues occur, return a NOT_FOUND response
@@ -72,6 +75,7 @@ public class VehicleController {
     @DeleteMapping("/license/{licensePlate}")
     public ResponseEntity<String> deleteVehicle(@PathVariable String licensePlate) {
         String result = vehicleServiceImpl.deleteVehicleByLicensePlate(licensePlate);
+        log.info("Successfully deleted vehicle with license plate: {}", licensePlate);
         return ResponseEntity.ok(result);
     }
 

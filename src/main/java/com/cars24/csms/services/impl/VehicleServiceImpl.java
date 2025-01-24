@@ -40,14 +40,17 @@ public class VehicleServiceImpl {
     }
 
     public List<GetVehicleRes> getVehicle(GetVehicleReq getVehicleReq) {
+        log.info("[getVehicle]",getVehicleReq);
         return vehicleDaoImpl.getVehicle(getVehicleReq);
     }
 
     public UpdateVehicleRes updateVehicle(String licensePlate, UpdateVehicleReq updateVehicleReq) {
+        log.info("[updateVehicle]",updateVehicleReq);
         return vehicleDaoImpl.updateVehicle(licensePlate, updateVehicleReq);
     }
 
     public String deleteVehicleByLicensePlate(String licensePlate) {
+        log.info("[deleteVehicleByLicensePlate] deleting vehicle with license plate: {}", licensePlate);
         return vehicleDaoImpl.deleteVehicle(licensePlate);
     }
 

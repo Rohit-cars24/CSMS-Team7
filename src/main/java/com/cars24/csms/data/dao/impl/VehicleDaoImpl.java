@@ -9,6 +9,7 @@ import com.cars24.csms.data.responses.UpdateVehicleRes;
 import com.cars24.csms.data.repositories.CustomerRepository;
 import com.cars24.csms.data.repositories.VehicleRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -18,11 +19,13 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class VehicleDaoImpl {
     private final VehicleRepository vehicleRepository;
     private final CustomerRepository customerRepository;
 
      public int createVehicle(CreateVehicleReq createVehicleReq){
+         log.info("[createVehicle] createVehicleReq {}",createVehicleReq);
 
         VehicleEntity vehicleEntity = new VehicleEntity();
         vehicleEntity.setVehicleId(0);
@@ -36,11 +39,13 @@ public class VehicleDaoImpl {
 
         vehicleRepository.save(vehicleEntity);
 
+
         return 0;
     }
 
     public List<GetVehicleRes> getVehicle(GetVehicleReq getVehicleReq){
         // Fetch vehicles based on the provided model and/or color
+        log.info("[getVehicle] getVehicleReq {}",getVehicleReq);
         List<VehicleEntity> vehicleEntities;
 
         if (getVehicleReq.getModel() != null && getVehicleReq.getColor() != null) {
@@ -74,6 +79,7 @@ public class VehicleDaoImpl {
 
 
     public UpdateVehicleRes updateVehicle(String licensePlate, UpdateVehicleReq updateVehicleReq) {
+        log.info("[updateVehicle] updateVehicleReq {}",updateVehicleReq);
         // Find the vehicle by license plate
         VehicleEntity vehicleEntity = vehicleRepository.findByLicensePlate(licensePlate);
 
@@ -114,6 +120,7 @@ public class VehicleDaoImpl {
 
 
     public String deleteVehicle(String licensePlate) {
+        log.info("[deleteVehicle] Request received to delete vehicle with license plate: {}", licensePlate);
         Optional<VehicleEntity> vehicle = vehicleRepository.findByLicensePlateAndIsActiveTrue(licensePlate);
 
         if (vehicle.isPresent()) {
