@@ -21,5 +21,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentsEntity,
     List<AppointmentsEntity> findAllByCustomerId(int userid);
 
     List<Integer> findAllAppointmentIdByCustomerId(int customerId);
+
+    boolean existsByAppointmentId(int appointmentId);
 }
 

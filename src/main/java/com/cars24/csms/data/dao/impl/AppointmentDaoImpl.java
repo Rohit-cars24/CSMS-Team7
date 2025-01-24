@@ -46,7 +46,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
         CustomerEntity customerEntity = customerRepository.findByUserid(userid);
 
-        return appointmentRepository.findAllByCustomerId(customerEntity.getUserId());
+        return appointmentRepository.findAllByCustomerId(customerEntity.getUserid());
 
     }
 

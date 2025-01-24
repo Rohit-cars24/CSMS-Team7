@@ -12,7 +12,6 @@ import com.cars24.csms.data.responses.DeleteCustomerResponse;
 import com.cars24.csms.data.responses.UpdateCustomerResponse;
 import com.cars24.csms.exceptions.CustomerServiceException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -34,7 +33,7 @@ public class CustomerDaoImpl implements CustomerDao {
         customerEntity.setEmail(createCustomerRequest.getEmail());
         customerEntity.setAddress(createCustomerRequest.getAddress());
 
-        customerEntity.setUserId(appUserRepository.findByUsername(createCustomerRequest.getEmail()).getId());
+        customerEntity.setUserid(appUserRepository.findByUsername(createCustomerRequest.getEmail()).getUser_id());
         customerEntity.setActive(true);
         customerRepository.save(customerEntity);
         return 0;

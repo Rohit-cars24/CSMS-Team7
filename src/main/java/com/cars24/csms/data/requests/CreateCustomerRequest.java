@@ -17,7 +17,7 @@ public class CreateCustomerRequest {
 
 
     private final CustomerServiceimpl customerServiceImpl;
-    @Valid
+    @Valid  
     @Size(max=20,message = "Name must not exceed 20 characters.")
     private String name;
 

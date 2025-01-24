@@ -9,5 +9,4 @@ public class ApiResponse {
     private String message;
     private String service;
     private Object data;
-
 }

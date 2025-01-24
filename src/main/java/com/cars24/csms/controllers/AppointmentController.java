@@ -43,7 +43,7 @@ public class AppointmentController {
     @GetMapping("/retrieveappointments")
     public ResponseEntity<List<AppointmentsEntity>> getAppointment(@Valid @RequestBody GetAppointmentRequest getAppointmentRequest){
         log.info("[getAppointment] getAppointment {}", getAppointmentRequest);
-        int userId = 2;
+        int userId = 1;
         return ResponseEntity.ok().body(appointmentServiceImpl.getAppointment(getAppointmentRequest, userId));
     }
 }

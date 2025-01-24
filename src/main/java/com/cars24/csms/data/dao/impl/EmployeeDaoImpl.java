@@ -30,7 +30,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         employeeEntity.setRole(createEmployeeReq.getRole().toString());
         employeeEntity.setSalary(createEmployeeReq.getSalary());
         employeeEntity.setActive(true);
-        employeeEntity.setUser_id(appUserRepository.getByUsername(createEmployeeReq.getEmail()).getUserid());
+        employeeEntity.setUser_id(appUserRepository.getByUsername(createEmployeeReq.getEmail()).getUser_id());
 
         employeeRepository.save(employeeEntity);
 

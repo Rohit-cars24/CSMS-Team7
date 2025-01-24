@@ -24,20 +24,15 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 public class CustomerController {
-//    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
+
     private final CustomerServiceimpl customerServiceImpl;
     @PostMapping
     public ResponseEntity<CreateCustomerResponse> createCustomer(@Valid @RequestBody CreateCustomerRequest createCustomerRequest){
-//        System.out.println("[createCustomer] createCustomerRequest {}"+createCustomerRequest);
-
-
         customerServiceImpl.createCustomerResponse(createCustomerRequest);
         log.info("[createCustomer] createCustomerRequest {}",createCustomerRequest);
         CreateCustomerResponse createCustomerResponse = new CreateCustomerResponse();
         return ResponseEntity.ok().body(createCustomerResponse);
     }
-
-
 
 
     @GetMapping

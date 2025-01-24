@@ -9,6 +9,8 @@ import java.util.Collection;
 @Repository
 public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Integer> {
     Collection<? extends InvoiceEntity> findAllByAppointmentId(Integer id);
+
+    boolean existsByAppointmentId(int appointmentId);
 //    List<InvoiceEntity> findByAppIdIn(List<Integer> appointmentIds);
 
 }
