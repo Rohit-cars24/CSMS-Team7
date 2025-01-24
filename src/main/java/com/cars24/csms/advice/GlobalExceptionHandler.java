@@ -1,10 +1,7 @@
 package com.cars24.csms.advice;
 
 
-import com.cars24.csms.exceptions.AppointmentServiceException;
-import com.cars24.csms.exceptions.EmployeeServiceException;
-import com.cars24.csms.exceptions.InvoiceServiceException;
-import com.cars24.csms.exceptions.UserServiceException;
+import com.cars24.csms.exceptions.*;
 import com.cars24.csms.data.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -94,6 +91,21 @@ class GlobalExceptionHandler {
     }
 
     //we are starting debug now
+
+    @ExceptionHandler(CustomerServiceException.class)
+    public ResponseEntity<ApiResponse> handleCustomerServiceException(CustomerServiceException exception){
+        ApiResponse apiResponse=new ApiResponse();
+        apiResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        apiResponse.setSuccess(false);
+        apiResponse.setMessage(exception.getMessage());
+        apiResponse.setService("APPUSER-" + HttpStatus.BAD_REQUEST.value());
+//        appUserDaoImpl.registerUser(signUpRequest);
+        apiResponse.setData(null);
+        return ResponseEntity.ok().body(apiResponse);
+
+    }
+
+
 
     
 
