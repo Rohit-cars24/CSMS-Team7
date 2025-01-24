@@ -95,7 +95,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(CustomerServiceException.class)
     public ResponseEntity<ApiResponse> handleCustomerServiceException(CustomerServiceException exception){
         ApiResponse apiResponse=new ApiResponse();
-        apiResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        apiResponse.setStatuscode(HttpStatus.BAD_REQUEST.value());
         apiResponse.setSuccess(false);
         apiResponse.setMessage(exception.getMessage());
         apiResponse.setService("APPUSER-" + HttpStatus.BAD_REQUEST.value());
@@ -104,11 +104,4 @@ class GlobalExceptionHandler {
         return ResponseEntity.ok().body(apiResponse);
 
     }
-
-
-
-    
-
-
-
 }
