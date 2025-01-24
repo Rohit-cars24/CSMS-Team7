@@ -5,9 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-
-public interface AppUserRepository extends JpaRepository<AppUserDetailsEntity,Integer> {
+public interface AppUserRepository extends JpaRepository<AppUserDetailsEntity, Integer> {
     public AppUserDetailsEntity findAppUserDetailsByUsernameAndPassword(String username, String password);
-
-    boolean existsByUsername(String username);
+    Boolean existsByUsername(String username);
+    public AppUserDetailsEntity getByUsername(String username);
 }

@@ -1,7 +1,11 @@
+
+
+
 package com.cars24.csms.advice;
 
 
 import com.cars24.csms.exceptions.AppointmentServiceException;
+import com.cars24.csms.exceptions.EmployeeServiceException;
 import com.cars24.csms.exceptions.UserServiceException;
 import com.cars24.csms.data.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -47,16 +51,19 @@ class GlobalExceptionHandler {
         return ResponseEntity.ok().body(apiResponse);
     }
 
-    @ExceptionHandler(AppointmentServiceException.class)
-    public ResponseEntity<ApiResponse> handleAppointmentServiceExceptions(AppointmentServiceException exception) {
 
-        ApiResponse apiResponse = new ApiResponse();
+@ExceptionHandler(EmployeeServiceException.class)
+    public  ResponseEntity<ApiResponse> handleEmployeeServiceExceptions(EmployeeServiceException employeeServiceException)
+    {
+        ApiResponse apiResponse=new ApiResponse();
         apiResponse.setStatuscode(HttpStatus.BAD_REQUEST.value());
         apiResponse.setSuccess(false);
-        apiResponse.setMessage(exception.getMessage());
-        apiResponse.setService("AppUsr " + HttpStatus.BAD_REQUEST.value());
+        apiResponse.setMessage(employeeServiceException.getMessage());
+        apiResponse.setService("EMPSRVC-" + HttpStatus.BAD_REQUEST.value());
         apiResponse.setData(null);
         return ResponseEntity.ok().body(apiResponse);
+
     }
+
 
 }
