@@ -19,4 +19,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentsEntity,
     boolean existsByCustomerIdAndVehicleIdAndServiceId(@Valid @Min(value = 1, message = "Invalid service ID") int serviceId, @Valid @Min(value = 1, message = "Invalid vehicle ID") int vehicleId, @Valid @Min(value = 1, message = "Invalid customer ID") int customerId);
 
     List<AppointmentsEntity> findAllByCustomerId(int userid);
+
+    List<Integer> findAllAppointmentIdByCustomerId(int customerId);
 }
+

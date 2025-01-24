@@ -1,4 +1,3 @@
-
 package com.cars24.csms.data.requests;
 
 import jakarta.validation.Valid;
