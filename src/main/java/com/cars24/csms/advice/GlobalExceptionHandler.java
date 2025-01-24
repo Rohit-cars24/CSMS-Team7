@@ -50,4 +50,17 @@ class GlobalExceptionHandler {
     public ResponseEntity<String> handleInvalidDateFormat(IllegalArgumentException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AppointmentServiceException.class)
+    public ResponseEntity<ApiResponse> handleAppointmentServiceExceptions(AppointmentServiceException exception) {
+
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setStatuscode(HttpStatus.BAD_REQUEST.value());
+        apiResponse.setSuccess(false);
+        apiResponse.setMessage(exception.getMessage());
+        apiResponse.setService("AppUsr " + HttpStatus.BAD_REQUEST.value());
+        apiResponse.setData(null);
+        return ResponseEntity.ok().body(apiResponse);
+    }
+
 }
