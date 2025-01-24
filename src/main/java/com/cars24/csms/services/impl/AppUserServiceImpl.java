@@ -1,6 +1,8 @@
 package com.cars24.csms.services.impl;
 
 import com.cars24.csms.data.requests.SignUpRequest;
+import com.cars24.csms.exceptions.AppointmentServiceException;
+import com.cars24.csms.exceptions.UserLoginExceptiom;
 import com.cars24.csms.exceptions.UserServiceException;
 import com.cars24.csms.services.AppUserService;
 import com.cars24.csms.data.dao.impl.AppUserDaoImpl;
@@ -26,6 +28,12 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public LoginResponse getAppUserDetails(LoginRequest loginRequest) {
+
+        if(!appUserRepository.existsByUsername(loginRequest.getUsername()))
+            throw new UserLoginExceptiom("User doesnt not exist");
+
+        if(!appUserRepository.existsByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword()))
+            throw new UserLoginExceptiom("Dont brute force us, u ll fail, enter the correct password fool");
 
         AppUserDetailsEntity appUserEntity = appUserDoaImpl.getAppUserDetails(loginRequest);
 

@@ -34,7 +34,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
     @Override
     public boolean checkAppointmentId(int appointmentId) {
         log.info("[InvoiceDaoImpl] checkAppointmentId {}", appointmentId);
-        boolean result = invoiceRepository.existsById(appointmentId);
+        boolean result = appointmentRepository.existsByAppointmentId(appointmentId);
         return result;
     }
 

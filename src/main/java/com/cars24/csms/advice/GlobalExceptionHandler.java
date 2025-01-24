@@ -105,5 +105,32 @@ class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(ProfileExistException.class)
+    public ResponseEntity<ApiResponse> handleProfileExistException(ProfileExistException exception){
+        ApiResponse apiResponse=new ApiResponse();
+        apiResponse.setStatuscode(HttpStatus.BAD_REQUEST.value());
+        apiResponse.setSuccess(false);
+        apiResponse.setMessage(exception.getMessage());
+        apiResponse.setService("APPUSER-" + HttpStatus.BAD_REQUEST.value());
+//        appUserDaoImpl.registerUser(signUpRequest);
+        apiResponse.setData(null);
+        return ResponseEntity.ok().body(apiResponse);
+
+    }
+
+    @ExceptionHandler(UserLoginExceptiom.class)
+    public ResponseEntity<ApiResponse> handleUserLoginExceptiom(UserLoginExceptiom exception){
+        ApiResponse apiResponse=new ApiResponse();
+        apiResponse.setStatuscode(HttpStatus.BAD_REQUEST.value());
+        apiResponse.setSuccess(false);
+        apiResponse.setMessage(exception.getMessage());
+        apiResponse.setService("APPUSER-" + HttpStatus.BAD_REQUEST.value());
+//        appUserDaoImpl.registerUser(signUpRequest);
+        apiResponse.setData(null);
+        return ResponseEntity.ok().body(apiResponse);
+
+    }
+
+
 
 }
