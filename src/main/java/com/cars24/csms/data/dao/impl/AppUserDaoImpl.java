@@ -16,27 +16,30 @@ import org.springframework.stereotype.Service;
 
 public class AppUserDaoImpl implements AppUserDao {
 
-    final private AppUserRepository appUserRepository;
+    private final AppUserRepository appUserRepository;
 
     @Override
-    public AppUserDetailsEntity getAppUser(LoginRequest loginRequest) {
-        log.info("[AppUserDaoImpl] getAppUser {}", loginRequest);
+    public AppUserDetailsEntity getAppUserDetails(LoginRequest loginRequest) {
         return appUserRepository.findAppUserDetailsByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
     }
 
     @Override
-    public void signUp(SignUpRequest signupRequest) {
+    public void createUser(SignUpRequest signupRequest) {
 
-        log.info("[AppUserDaoImpl] signUp {}", signupRequest);
 
-        AppUserDetailsEntity appUserDetails = new AppUserDetailsEntity();
+        AppUserDetailsEntity appUserEntity = new AppUserDetailsEntity();
 
-        ObjectMapper mapper = new ObjectMapper();
-        appUserDetails = mapper.convertValue(signupRequest, AppUserDetailsEntity.class);
+        // appUserEntity.setUser_id(10);
+        appUserEntity.setActive(true);
+        appUserEntity.setPassword(signupRequest.getPassword());
+        appUserEntity.setUsername(signupRequest.getUsername());
+        appUserEntity.setUserType(signupRequest.getUsertype().toString());
 
-        appUserDetails.setActive(true);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        AppUserEntity appUserEntity = objectMapper.convertValue(signupRequest , AppUserEntity.class);
+//        appUserEntity.setActive(true);
 
-        appUserRepository.save(appUserDetails);
+        appUserRepository.save(appUserEntity);
 
     }
 }

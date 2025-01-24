@@ -6,7 +6,9 @@ import com.cars24.csms.data.responses.ApiResponse;
 import com.cars24.csms.data.responses.LoginResponse;
 import org.springframework.http.ResponseEntity;
 
+
+
 public interface AppUserService {
     public LoginResponse getAppUserDetails(LoginRequest loginRequest);
-    public ResponseEntity<ApiResponse> signUp(SignUpRequest signupRequest);
+    public ResponseEntity<ApiResponse> createUser(SignUpRequest signupRequest);
 }

@@ -3,7 +3,6 @@ package com.cars24.csms.services.impl;
 import com.cars24.csms.data.requests.SignUpRequest;
 import com.cars24.csms.exceptions.UserServiceException;
 import com.cars24.csms.services.AppUserService;
-
 import com.cars24.csms.data.dao.impl.AppUserDaoImpl;
 import com.cars24.csms.data.entities.AppUserDetailsEntity;
 import com.cars24.csms.data.repositories.AppUserRepository;
@@ -22,43 +21,49 @@ import org.springframework.stereotype.Service;
 
 public class AppUserServiceImpl implements AppUserService {
 
-    private final AppUserDaoImpl appUserDaoImpl;
+    private final AppUserDaoImpl appUserDoaImpl;
     private final AppUserRepository appUserRepository;
 
     @Override
     public LoginResponse getAppUserDetails(LoginRequest loginRequest) {
 
-        log.info("[AppUserServiceImpl] getAppUserDetails {}", loginRequest);
+        AppUserDetailsEntity appUserEntity = appUserDoaImpl.getAppUserDetails(loginRequest);
 
-        AppUserDetailsEntity appUserDetails = appUserDaoImpl.getAppUser(loginRequest);
-        LoginResponse loginResponse = new LoginResponse();
+        LoginResponse loginResp = new LoginResponse();
+        loginResp.setUser_id(appUserEntity.getUser_id());
+        loginResp.setUsername(appUserEntity.getUsername());
 
-        loginResponse.setId(appUserDetails.getId());
-        loginResponse.setUsername(appUserDetails.getUsername());
+        return loginResp;
 
-        return loginResponse;
     }
 
     @Override
-    public ResponseEntity<ApiResponse> signUp(SignUpRequest signupRequest) {
+    public ResponseEntity<ApiResponse> createUser(SignUpRequest signupRequest) {
 
-        log.info("[AppUserServiceImpl] signUp {}", signupRequest);
+        boolean exists = false;
+        ApiResponse resp = new ApiResponse();
 
-        ApiResponse apiResponse = new ApiResponse();
+        exists = appUserRepository.existsByUsername(signupRequest.getUsername());
 
-        if(appUserRepository.existsByUsername(signupRequest.getUsername())){
-            throw new UserServiceException("User already exists");
+
+        if(!exists) {
+
+            resp.setStatuscode(HttpStatus.OK.value());
+            resp.setSuccess(true);
+            resp.setMessage("User signed up successfully");
+            resp.setService("APPUSR - " + HttpStatus.OK.value());
+            resp.setData(null);
+
+            appUserDoaImpl.createUser(signupRequest);
+
+            return ResponseEntity.ok().body(resp);
+
         }
 
-        appUserDaoImpl.signUp(signupRequest);
+        else{
 
-        apiResponse.setStatuscode(HttpStatus.OK.value());
-        apiResponse.setSuccess(true);
-        apiResponse.setMessage("User signed up succesfully");
-        apiResponse.setService("AppUsr" + HttpStatus.OK.value());
-        apiResponse.setData(null);
-        return ResponseEntity.ok().body(apiResponse);
+            throw new UserServiceException("User Already Exist");
 
+        }
     }
-
 }

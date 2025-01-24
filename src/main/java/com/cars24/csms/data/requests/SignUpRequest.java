@@ -1,5 +1,6 @@
 package com.cars24.csms.data.requests;
 
+import com.cars24.csms.data.enums.UserType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -8,9 +9,11 @@ import lombok.Data;
 @Data
 @Valid
 
+
 public class SignUpRequest {
 
     @Valid
+
     @NotBlank(message = "Username cannot be blank")
     @Pattern(
             regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$",
@@ -26,4 +29,10 @@ public class SignUpRequest {
     )
     private String password;
 
+    private UserType usertype;
+
 }
+
+
+
+
