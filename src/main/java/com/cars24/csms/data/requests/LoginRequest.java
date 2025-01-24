@@ -26,4 +26,5 @@ public class LoginRequest {
             message = "Password must be at least 8 characters long, contain one uppercase letter, one lowercase letter, one digit, and one special character"
     )
     private String password;
+
 }

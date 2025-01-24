@@ -2,8 +2,6 @@ package com.cars24.csms.data.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Generated;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Data
 @Table(name = "user_details")
@@ -13,11 +11,19 @@ public class AppUserDetailsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "username")
+    @Column( name = "user_id" )
+    private int user_id;
+
+    @Column( name = "username")
     private String username;
-    @Column(name = "password")
+
+    @Column( name = "password")
     private String password;
+
+    @Column( name = "isActive" )
     private boolean isActive;
+
+    @Column(name = "usertype")
+    private String userType;
 
 }

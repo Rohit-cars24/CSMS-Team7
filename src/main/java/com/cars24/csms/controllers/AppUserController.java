@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -18,20 +19,26 @@ import org.springframework.web.bind.annotation.*;
 @Service
 @RestController
 
+
 public class AppUserController {
 
-    private final AppUserServiceImpl appUserService;
+    private final AppUserServiceImpl appUserServiceImpl;
 
     @GetMapping("/login")
-    public ResponseEntity<LoginResponse> getAppUser(@Valid @RequestBody LoginRequest loginRequest){
-        log.info("[AppUserServiceImpl] getAppUser {}", loginRequest);
-        LoginResponse loginResponse = appUserService.getAppUserDetails(loginRequest);
-        return ResponseEntity.ok().body(loginResponse);
+    public ResponseEntity<LoginResponse> getUser(@Valid @RequestBody LoginRequest loginRequest){
+
+        LoginResponse loginResp = appUserServiceImpl.getAppUserDetails(loginRequest);
+        return ResponseEntity.ok().body(loginResp);
+        //return null;
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponse> createAppUser(@Valid @RequestBody SignUpRequest signupRequest){
-        log.info("[AppUserServiceImpl] createAppUser {}", signupRequest);
-        return appUserService.signUp(signupRequest);
+    public ResponseEntity<ApiResponse> createUser(@Valid @RequestBody SignUpRequest signupRequest){
+        log.info(signupRequest.getUsername());
+        log.info(signupRequest.getPassword());
+
+        return appUserServiceImpl.createUser(signupRequest);
+
     }
+
 }
