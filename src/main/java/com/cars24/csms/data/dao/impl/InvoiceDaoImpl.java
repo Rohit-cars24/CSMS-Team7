@@ -40,6 +40,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
 
     @Override
     public List<InvoiceEntity> getAllInvoices(List<Integer> appointmentsId) {
+        log.info("[InvoiceDaoImpl] getAllInvoices {}", appointmentsId);
 
         List<InvoiceEntity> invoices = new ArrayList<>();
 

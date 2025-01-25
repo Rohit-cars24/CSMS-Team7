@@ -52,8 +52,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     public List<InvoiceEntity> fetchAppIdByCustomerId(int userId) {
         log.info("[InvoiceServiceImpl] fetchAppIdByCustomerId {}", userId);
+
         CustomerEntity customerEntity = customerRepository.findAllByUserid(userId);
+
         int customerId = customerEntity.getCustomer_id();
+
         List<AppointmentsEntity> appointmentsEntities = appointmentRepository.findAllByCustomerId(customerId);
 
         List<Integer> appIds = new ArrayList<>();
