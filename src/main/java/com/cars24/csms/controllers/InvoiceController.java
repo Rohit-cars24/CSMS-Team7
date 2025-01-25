@@ -33,10 +33,8 @@ public class InvoiceController {
 
     @GetMapping("/fetch")
     public ResponseEntity<List<InvoiceEntity>> fetchCustomerInvoices(@Valid @RequestParam int userId){
-        log.info("[InvoiceController] fetchCustomerInvoices {}", userId);
 
-        // assuming i get the customerId from the customer Repository
-        // userId is stored as foreign key in customers table
+        log.info("[InvoiceController] fetchCustomerInvoices {}", userId);
 
         List<InvoiceEntity> invoices = invoiceService.fetchAppIdByCustomerId(userId);
 
